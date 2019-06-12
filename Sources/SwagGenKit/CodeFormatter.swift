@@ -290,11 +290,7 @@ public class CodeFormatter {
                 context["body"] = getRequestBodyContext(requestBody)
                 context["bodyProperties"] = schema.properties.map(getPropertyContext)
             }
-            if let multipart = requestBody.value.content.multipartFormSchema {
-                context["body"] = getRequestBodyContext(requestBody)
-                context["bodyProperties"] = multipart.properties.map(getPropertyContext)
-            }
-            if let formSchema = requestBody.value.content.formSchema {
+            if let formSchema = requestBody.value.content.formSchema ?? requestBody.value.content.multipartFormSchema {
                 formProperties = formSchema.properties.map(getPropertyContext)
                 context["isUpload"] = formSchema.properties.contains { $0.schema.isFile }
             }
