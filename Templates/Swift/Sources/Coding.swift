@@ -17,14 +17,22 @@ public protocol ResponseDecoder {
 
 extension JSONDecoder: ResponseDecoder {}
 
-extension APIModel {
+public protocol RequestEncoder {
+
+    func encode<T: Encodable>(_ value: T) throws -> Data
+}
+
+extension JSONEncoder: RequestEncoder {}
+
+extension {{ options.modelProtocol }} {
     func encode() -> [String: Any] {
         guard
             let jsonData = try? JSONEncoder().encode(self),
-            let jsonDictionary = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
+            let jsonValue = try? JSONSerialization.jsonObject(with: jsonData),
+            let jsonDictionary = jsonValue as? [String: Any] else {
                 return [:]
         }
-        return jsonDictionary ?? [:]
+        return jsonDictionary
     }
 }
 

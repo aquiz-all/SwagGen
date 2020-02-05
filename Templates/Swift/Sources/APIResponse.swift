@@ -4,7 +4,7 @@ import Foundation
 import Alamofire
 
 public protocol APIResponseValue: CustomDebugStringConvertible, CustomStringConvertible {
-    associatedtype SuccessType
+    associatedtype SuccessType{% if options.codableResponses %} : Codable{% endif %}
     var statusCode: Int { get }
     var successful: Bool { get }
     var response: Any { get }
@@ -88,7 +88,7 @@ extension APIResponse: CustomStringConvertible, CustomDebugStringConvertible {
 
     public var debugDescription: String {
         var string = description
-        if let response = result.value?.response {
+        if let response = try? result.get().response {
           if let debugStringConvertible = response as? CustomDebugStringConvertible {
               string += "\n\(debugStringConvertible.debugDescription)"
           }

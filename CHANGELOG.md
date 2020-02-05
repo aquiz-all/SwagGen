@@ -1,10 +1,55 @@
 # Change Log
+
 ## Next Version
 
-### Swift Template Updates
-- Fixed path to `Enum.swift` on Linux
-- Added support for objects in query params
-- Added support for nullable properties
+## 4.3.1
+
+### Fixed
+- Fixed `'??' has non-optional type` warning #207
+- Fixed incorrect replacements in server variables #209
+- Fixed nullable references not being generated as optionals #216 @alephao
+
+### Internal
+ - Removed needless `Array` initialization. #212 @RomanPodymov
+
+[Commits](https://github.com/yonaskolb/SwagGen/compare/4.3.0...4.3.1)
+
+## 4.3.0
+
+### Added
+- Added ability to set nested template options from the command line using dot syntax eg `--option "typeAliases.ID: String"` #189
+- Added a customizable `jsonEncoder` on APIClient #172 #203
+- Added support for using a custom encoder per request #172 #203
+
+### Changes
+- List operations by path and then by method to keep the order consistent between code generations #185
+- Add `codableResponses` option that constrains all models and responses to Codable #198
+- Add `propertyNames` option that allow to override the name of properties #196
+
+### Fixed
+- Fixed responses from silently failing to parse when missing a `description`, which is now an optional property that defaults to an empty string #193
+- Add missing custom model protocol name #191
+- Fixed missing customization of JSONEncoder instance to encode request's body #147
+- Fixed string uploads #161
+
+[Commits](https://github.com/yonaskolb/SwagGen/compare/4.2.0...4.3.0)
+
+## 4.2.0
+
+### Swift Template Changes
+- Added support for objects in query params #158
+- Added support for nullable properties #165
+- Removed 3rd party Result framework #174
+- Fixed path to `Enum.swift` on Linux #157
+- Fixed model initializers with multiple levels of inheritance #175
+
+### Fixes
+- Decode Swagger specs with no components #180
+
+### Changes
+- Update dependencies
+
+[Commits](https://github.com/yonaskolb/SwagGen/compare/4.1.0...4.2.0)
 
 ## 4.1.0
 

@@ -54,11 +54,10 @@ extension TestSpec {
 
             public var body: Body
 
-            public init(body: Body) {
+            public init(body: Body, encoder: RequestEncoder? = nil) {
                 self.body = body
-                super.init(service: PostInlinebody.service) {
-                    let jsonEncoder = JSONEncoder()
-                    return try jsonEncoder.encode(body)
+                super.init(service: PostInlinebody.service) { defaultEncoder in
+                    return try (encoder ?? defaultEncoder).encode(body)
                 }
             }
         }

@@ -14,7 +14,7 @@ public struct Petstore {
     public static var safeArrayDecoding = false
 
     /// Used to encode Dates when uses as string params
-    public static let dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ")
+    public static var dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ")
 
     public static let version = "1.0.0"
 
@@ -25,8 +25,8 @@ public struct Petstore {
         /** Test environment **/
         public static func test(space: String = "main", version: String = "v1") -> String {
             var url = "https://test.petstore.com/{version}/{space}"
-            url = url.replacingOccurrences(of: "{\(space)}", with: space)
-            url = url.replacingOccurrences(of: "{\(version)}", with: version)
+            url = url.replacingOccurrences(of: "{space}", with: space)
+            url = url.replacingOccurrences(of: "{version}", with: version)
             return url
         }
 

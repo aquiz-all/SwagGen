@@ -18,14 +18,22 @@ public protocol ResponseDecoder {
 
 extension JSONDecoder: ResponseDecoder {}
 
+public protocol RequestEncoder {
+
+    func encode<T: Encodable>(_ value: T) throws -> Data
+}
+
+extension JSONEncoder: RequestEncoder {}
+
 extension APIModel {
     func encode() -> [String: Any] {
         guard
             let jsonData = try? JSONEncoder().encode(self),
-            let jsonDictionary = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
+            let jsonValue = try? JSONSerialization.jsonObject(with: jsonData),
+            let jsonDictionary = jsonValue as? [String: Any] else {
                 return [:]
         }
-        return jsonDictionary ?? [:]
+        return jsonDictionary
     }
 }
 

@@ -18,11 +18,10 @@ If a device with the same id already exists a `409` conflict will be returned.
 
             public var body: DeviceRegistrationRequest
 
-            public init(body: DeviceRegistrationRequest) {
+            public init(body: DeviceRegistrationRequest, encoder: RequestEncoder? = nil) {
                 self.body = body
-                super.init(service: RegisterDevice.service) {
-                    let jsonEncoder = JSONEncoder()
-                    return try jsonEncoder.encode(body)
+                super.init(service: RegisterDevice.service) { defaultEncoder in
+                    return try (encoder ?? defaultEncoder).encode(body)
                 }
             }
         }

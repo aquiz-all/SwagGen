@@ -14,7 +14,7 @@ public struct TFL {
     public static var safeArrayDecoding = false
 
     /// Used to encode Dates when uses as string params
-    public static let dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ")
+    public static var dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ")
 
     public static let version = "v1"
 

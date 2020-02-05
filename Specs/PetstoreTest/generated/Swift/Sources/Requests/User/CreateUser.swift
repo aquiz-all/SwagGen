@@ -20,11 +20,10 @@ extension PetstoreTest.User {
 
             public var body: User
 
-            public init(body: User) {
+            public init(body: User, encoder: RequestEncoder? = nil) {
                 self.body = body
-                super.init(service: CreateUser.service) {
-                    let jsonEncoder = JSONEncoder()
-                    return try jsonEncoder.encode(body)
+                super.init(service: CreateUser.service) { defaultEncoder in
+                    return try (encoder ?? defaultEncoder).encode(body)
                 }
             }
         }
