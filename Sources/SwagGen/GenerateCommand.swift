@@ -192,12 +192,9 @@ class GenerateCommand: Command {
         //        writeError("Couldn't calculate type for: \(value.name)\(value.description.flatMap{" \"\($0)\""} ?? "")")
         //    }
 
-        standardOut("Context: \(context)")
-
-
         let generator = Generator(context: context, destination: destinationPath.normalize(), templateConfig: templateConfig)
 
-        standardOut("Destination--: \(destinationPath.absolute())")
+        standardOut("Destination: \(destinationPath.absolute())")
 
         do {
             let generationResult = try generator.generate(clean: clean) { change in
